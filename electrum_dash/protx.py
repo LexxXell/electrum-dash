@@ -302,7 +302,7 @@ class ProTxManager(Logger):
         KeyIdVoting = b58_address_to_hash160(mn.voting_addr)[1]
         payloadSig = b'' if coll_hash_is_null else b'\x00'*65
 
-        tx = DashProRegTx(1, mn.type, mn.mode, mn.collateral, mn.service.ip,
+        tx = DashProRegTx(2, mn.type, mn.mode, mn.collateral, mn.service.ip,
                           mn.service.port, KeyIdOwner, PubKeyOperator,
                           KeyIdVoting, mn.op_reward, scriptPayout,
                           b'\x00'*32, payloadSig)
@@ -333,9 +333,9 @@ class ProTxManager(Logger):
         else:
             scriptOpPayout = b''
 
-        tx = DashProUpServTx(1, bfh(mn.protx_hash)[::-1],
+        tx = DashProUpServTx(2, bfh(mn.protx_hash)[::-1],
                              mn.service.ip, mn.service.port,
-                             scriptOpPayout, b'\x00'*32, b'\x00'*96)
+                             scriptOpPayout, b'\x00'*32, b'\x00'*96, 0)
         return tx
 
     def prepare_pro_up_reg_tx(self, mn):
